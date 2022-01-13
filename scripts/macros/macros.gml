@@ -1,0 +1,2 @@
+
+#macro TILESIZE 16
