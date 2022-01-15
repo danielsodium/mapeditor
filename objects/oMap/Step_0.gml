@@ -62,7 +62,6 @@ if (keyboard_check_pressed(ord("S"))) {
 }
 
 if (keyboard_check_pressed(ord("F"))) {
-    loadData();
     if (ds_map_exists(global.saveF, string(map))) {
         show_debug_message("CLEAR");
         ds_grid_copy(oEditor.level, global.saveF[? string(map)][currentlevelNum]);
@@ -102,8 +101,25 @@ if (keyboard_check_pressed(ord("F"))) {
 
 
 if (keyboard_check_pressed(vk_up)) {
-    currentlevelNum++;
+    if (ds_map_exists(global.saveF, string(map))) {
+
+        if (array_length(global.saveF[? string(map)]) > currentlevelNum) {
+            currentlevelNum++;
+        }
+        else {
+            currentlevelNum = 0;
+        }
+    }
+    
+    
 }
 if (keyboard_check_pressed(vk_down)) {
-    currentlevelNum--;
+    if (currentlevelNum > 0) {
+        currentlevelNum--;
+    }
+    else {
+        if (ds_map_exists(global.saveF, string(map))) {
+            currentlevelNum = array_length(global.saveF[? string(map)]);
+        }
+    }
 }

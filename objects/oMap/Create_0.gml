@@ -8,3 +8,4 @@ map = 0;
 global.saveN = 1;
 
 global.saveF = ds_map_create();
+loadData();
