@@ -45,26 +45,61 @@ if (mouse_check_button_pressed(mb_left)) {
  
 
 if (keyboard_check_pressed(ord("S"))) {
+    var savedLevel = ds_grid_create(ds_grid_width(oEditor.level), ds_grid_height(oEditor.level));
+    ds_grid_copy(savedLevel, oEditor.level);
     if (ds_map_exists(global.saveF, string(map))) {
-        //array_push(global.saveF[? string(map)], oEditor.level);
-        if (array_length(global.saveF[? string(map)]) < currentlevelNum) array_push(global.saveF[? string(map)], oEditor.level);
-        else global.saveF[? string(map)][currentlevelNum] = oEditor.level;
+        if (array_length(global.saveF[? string(map)]) <= currentlevelNum) array_push(global.saveF[? string(map)], savedLevel);
+        else {
+            show_debug_message("POTATO");
+            ds_grid_copy(global.saveF[? string(map)][currentlevelNum], savedLevel);
+        }
     }
     else {
-        ds_map_add(global.saveF, string(map), [oEditor.level]);
+        ds_map_add(global.saveF, string(map), [savedLevel]);
     }
     saveData();
-    //show_debug_message(ds_map_write(global.saveF));
+    show_debug_message(ds_grid_write(oEditor.level));
 }
 
-if (keyboard_check_pressed(ord("T"))) {
+if (keyboard_check_pressed(ord("F"))) {
     loadData();
     if (ds_map_exists(global.saveF, string(map))) {
-        oEditor.level = global.saveF[? string(map)][currentlevelNum];
+        show_debug_message("CLEAR");
+        ds_grid_copy(oEditor.level, global.saveF[? string(map)][currentlevelNum]);
     }
     
-    //show_debug_message(ds_map_write(global.saveF));
+    show_debug_message("LAODED");
 }
+/*
+if (keyboard_check_pressed(ord("S"))) {
+    var savedLevel = ds_grid_create(ds_grid_width(oEditor.level), ds_grid_height(oEditor.level));
+    ds_grid_copy(savedLevel, oEditor.level);
+    if (ds_map_exists(global.saveF, string(map))) {
+        //array_push(global.saveF[? string(map)], oEditor.level);
+        
+        if (array_length(global.saveF[? string(map)]) < currentlevelNum) array_push(global.saveF[? string(map)], savedLevel);
+        
+        else global.saveF[? string(map)][currentlevelNum] = savedLevel;
+    }
+    else {
+        ds_map_add(global.saveF, string(map), [savedLevel]);
+        ds_map_clear(global.saveF);
+    }
+    //saveData();
+    show_debug_message(ds_map_write(global.saveF));
+}
+
+if (keyboard_check_pressed(ord("F"))) {
+    loadData();
+    if (ds_map_exists(global.saveF, string(map))) {
+        show_debug_message("CLEAR");
+        ds_grid_copy(oEditor.level, global.saveF[? string(map)][currentlevelNum]);
+    }
+    
+    show_debug_message("LAODED");
+}
+*/
+
 
 if (keyboard_check_pressed(vk_up)) {
     currentlevelNum++;
