@@ -1,14 +1,14 @@
 if (live_call()) return live_result;
 
 // Drag to move
-if (mouse_check_button_pressed(mb_middle)) {
+if (mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(ord("E"))) {
     startX = x;
     startY = y;
     dragX = device_mouse_x_to_gui(0);
     dragY = device_mouse_y_to_gui(0);
 }
 
-if (mouse_check_button(mb_middle)) {
+if (mouse_check_button(mb_middle) || keyboard_check(ord("E"))) {
     x = startX + (dragX - device_mouse_x_to_gui(0))*zoom_level;
     y = startY + (dragY - device_mouse_y_to_gui(0))*zoom_level;
     camera_set_view_pos(cam, x, y);

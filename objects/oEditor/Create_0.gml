@@ -5,8 +5,8 @@ window_set_cursor(cr_cross);
 mapX = 20;
 mapY = 20;
 _buff = 10;
-_posX = 100;
-_posY = 100;
+_posX = 500;
+_posY = 200;
 
 scolor = 1;
 

@@ -21,7 +21,21 @@ if (mouse_check_button_pressed(mb_left)) {
                            
                            selected = selected ^ (1 << _selected);
                            map = ignore_corners(selected);
-                           used = true;
+
+                            /*
+                            var found = false;
+                            for (var i = 0; i < array_length(global.saveF.indexes); i++) {
+                                if (global.saveF.indexes[i] == map) {
+                                    array_push(global.saveF.values[i], []);
+                                    found = true;
+                                }
+                            }
+                            if (!found) {
+                                array_push(global.saveF.indexes, map);
+                                array_push(global.saveF.values, [ds_grid_write(oEditor.level)])
+                            }*/
+                           
+                           
            }
         }
     }
@@ -29,3 +43,32 @@ if (mouse_check_button_pressed(mb_left)) {
     
 }
  
+
+if (keyboard_check_pressed(ord("S"))) {
+    if (ds_map_exists(global.saveF, string(map))) {
+        //array_push(global.saveF[? string(map)], oEditor.level);
+        if (array_length(global.saveF[? string(map)]) < currentlevelNum) array_push(global.saveF[? string(map)], oEditor.level);
+        else global.saveF[? string(map)][currentlevelNum] = oEditor.level;
+    }
+    else {
+        ds_map_add(global.saveF, string(map), [oEditor.level]);
+    }
+    saveData();
+    //show_debug_message(ds_map_write(global.saveF));
+}
+
+if (keyboard_check_pressed(ord("T"))) {
+    loadData();
+    if (ds_map_exists(global.saveF, string(map))) {
+        oEditor.level = global.saveF[? string(map)][currentlevelNum];
+    }
+    
+    //show_debug_message(ds_map_write(global.saveF));
+}
+
+if (keyboard_check_pressed(vk_up)) {
+    currentlevelNum++;
+}
+if (keyboard_check_pressed(vk_down)) {
+    currentlevelNum--;
+}

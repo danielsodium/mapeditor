@@ -21,3 +21,4 @@ for (var i = 0; i < 3; i++) {
 }
 
 
+draw_text(window_get_width()- 50, 40, currentlevelNum);

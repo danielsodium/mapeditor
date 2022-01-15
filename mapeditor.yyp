@@ -34,6 +34,7 @@
     {"id":{"name":"rInit","path":"rooms/rInit/rInit.yy",},"order":0,},
     {"id":{"name":"binary","path":"scripts/binary/binary.yy",},"order":0,},
     {"id":{"name":"macros","path":"scripts/macros/macros.yy",},"order":1,},
+    {"id":{"name":"saves","path":"scripts/saves/saves.yy",},"order":2,},
   ],
   "Options": [
     {"name":"Android","path":"options/android/options_android.yy",},
