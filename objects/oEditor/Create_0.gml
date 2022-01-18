@@ -2,8 +2,8 @@ if (live_call()) return live_result;
 
 window_set_cursor(cr_cross);
 
-mapX = 20;
-mapY = 20;
+mapX = 5;
+mapY = 5;
 _buff = 10;
 _posX = 500;
 _posY = 200;

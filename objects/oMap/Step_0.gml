@@ -21,6 +21,10 @@ if (mouse_check_button_pressed(mb_left)) {
                            
                            selected = selected ^ (1 << _selected);
                            map = ignore_corners(selected);
+                           if (ds_map_exists(global.saveF, string(map))) {
+                               currentSaves = array_length(global.saveF[? string(map)]);
+                           } else currentSaves = 0;
+                           
 
                             /*
                             var found = false;
@@ -45,13 +49,12 @@ if (mouse_check_button_pressed(mb_left)) {
  
 
 if (keyboard_check_pressed(ord("S"))) {
-    var savedLevel = ds_grid_create(ds_grid_width(oEditor.level), ds_grid_height(oEditor.level));
-    ds_grid_copy(savedLevel, oEditor.level);
+    var savedLevel = ds_grid_write(oEditor.level);
     if (ds_map_exists(global.saveF, string(map))) {
         if (array_length(global.saveF[? string(map)]) <= currentlevelNum) array_push(global.saveF[? string(map)], savedLevel);
         else {
             show_debug_message("POTATO");
-            ds_grid_copy(global.saveF[? string(map)][currentlevelNum], savedLevel);
+            global.saveF[? string(map)][currentlevelNum] = savedLevel;
         }
     }
     else {
@@ -62,9 +65,12 @@ if (keyboard_check_pressed(ord("S"))) {
 }
 
 if (keyboard_check_pressed(ord("F"))) {
-    if (ds_map_exists(global.saveF, string(map))) {
+    loadData();
+    if (ds_map_exists(global.saveF, string(map)) && array_length(global.saveF[? string(map)]) > currentlevelNum) {
         show_debug_message("CLEAR");
-        ds_grid_copy(oEditor.level, global.saveF[? string(map)][currentlevelNum]);
+        ds_grid_read(oEditor.level, global.saveF[? string(map)][currentlevelNum]);
+    } else {
+        ds_grid_clear(oEditor.level, 0);
     }
     
     show_debug_message("LAODED");
@@ -102,7 +108,7 @@ if (keyboard_check_pressed(ord("F"))) {
 
 if (keyboard_check_pressed(vk_up)) {
     if (ds_map_exists(global.saveF, string(map))) {
-
+        show_debug_message(global.saveF[? string(map)]);
         if (array_length(global.saveF[? string(map)]) > currentlevelNum) {
             currentlevelNum++;
         }
