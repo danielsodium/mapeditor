@@ -21,5 +21,5 @@ for (var i = 0; i < 3; i++) {
 }
 
 
-draw_text(window_get_width()- 50 - string_width("Map Number: "), 40, "Map Number: " + string(currentlevelNum));
-draw_text(window_get_width()- 50 - string_width("Saves: "), 60, "Saves: " + string(currentSaves));
+draw_text(display_get_gui_width()- 50 - string_width("Map Number: "), 40, "Map Number: " + string(currentlevelNum));
+draw_text(display_get_gui_width()- 50 - string_width("Saves: "), 60, "Saves: " + string(currentSaves));

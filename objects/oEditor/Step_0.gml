@@ -9,7 +9,7 @@ if (mouse_check_button_pressed(mb_left)) {
                                
         var _sel = floor((device_mouse_x_to_gui(0)-toolX)/(toolSize+toolBuff)) 
                  + floor((device_mouse_y_to_gui(0)-toolHeight)/(toolSize+toolBuff))*5;
-        if (array_length(tools) > _sel) scolor = _sel;
+        if (tools > _sel) scolor = _sel;
            
     }
 }
@@ -22,10 +22,9 @@ if (mouse_check_button(mb_left) || keyboard_check(vk_space)) {
 }
 if (mouse_check_button_pressed(mb_side2) || keyboard_check_pressed(ord("1"))) {
     scolor++;
-    if (scolor > 1) scolor = 0;
+    if (scolor > tools) scolor = 0;
     show_debug_message(scolor);
-}
-if (mouse_check_button_pressed(mb_side1)) {
+} else if (mouse_check_button_pressed(mb_side1)) {
     scolor--;
     if (scolor < 0) scolor = 1;
     show_debug_message(scolor);

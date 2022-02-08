@@ -1,0 +1,12 @@
+
+CHEAT SHEET
+
+M1 || SPACE         draw tiles.
+1                   rotate between toolbrushes;
+Q                   clear editor
+F                   load saved map
+S                   save map
+UP || DOWN          change selected save file
+P                   fullscreen
+
+Map dimensions can be set through oEditor.mapX and oEditor.mapY.

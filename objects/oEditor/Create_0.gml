@@ -8,7 +8,7 @@ _buff = 10;
 _posX = 500;
 _posY = 200;
 
-tools = [0,1];
+tools = 5//[0,1,2,3,4,5];
 
 scolor = 1;
 
